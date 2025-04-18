@@ -1,8 +1,8 @@
 -- Database schema for Inventory Manager Mobile App
 
 -- Create database
-CREATE DATABASE IF NOT EXISTS u345095192_bilgixavoak;
-USE u345095192_bilgixavoak;
+CREATE DATABASE IF NOT EXISTS u345095192_bilgixavoakdb;
+USE u345095192_bilgixavoakdb;
 
 
 
