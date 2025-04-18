@@ -15,10 +15,33 @@ require_once __DIR__ . '/functions.php';
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title><?= APP_NAME ?></title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#2563eb">
+    <meta name="description" content="Mobile inventory management system for small businesses">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"> -->
+    <meta name="apple-mobile-web-app-title" content="<?= APP_NAME ?>">
+    
+    <!-- PWA Icons and Splash Screens -->
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+    <link rel="apple-touch-startup-image" href="/assets/icons/splash-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="/assets/icons/splash-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="/assets/icons/splash-1242x2208.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3)">
+    <link rel="apple-touch-startup-image" href="/assets/icons/splash-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)">
+    <link rel="apple-touch-startup-image" href="/assets/icons/splash-1536x2048.png" media="(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="/assets/icons/splash-1668x2224.png" media="(min-device-width: 834px) and (max-device-width: 834px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="/assets/icons/splash-2048x2732.png" media="(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-device-pixel-ratio: 2)">
+    
+    <!-- Stylesheets -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- <link rel="stylesheet" href="/assets/css/app.css"> -->
+    
     <style>
         /* Custom styles for mobile app feel */
         body {
@@ -37,9 +60,35 @@ require_once __DIR__ . '/functions.php';
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+        /* PWA specific styles */
+        #installButton {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            z-index: 100;
+        }
+        /* Suppress pull-to-refresh and iOS touch callouts */
+        html {
+            overscroll-behavior-y: contain;
+            -webkit-touch-callout: none;
+        }
+        /* Fix for bottom navigation on iOS devices with Home Indicator */
+        @supports(padding: max(0px)) {
+            .bottom-nav {
+                padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+            }
+            body {
+                padding-bottom: 5rem;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-100 min-h-screen pb-16">
+    <!-- Install Button (hidden by default, shown via JS) -->
+    <button id="installButton" class="hidden bg-blue-600 text-white py-2 px-4 rounded-full shadow-lg flex items-center">
+        <i class="fas fa-download mr-2"></i> Install App
+    </button>
+
     <!-- Flash Messages -->
     <?php if (isset($_SESSION['message'])): ?>
     <div id="flashMessage" class="fixed top-0 left-0 right-0 z-50 p-4 <?= $_SESSION['message_type'] == 'success' ? 'bg-green-500' : 'bg-red-500' ?> text-white text-center">

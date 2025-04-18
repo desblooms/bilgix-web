@@ -1,7 +1,3 @@
-
-
-
-
 <?php
 // Close the main div
 echo '</main>';
@@ -10,6 +6,12 @@ echo '</main>';
 echo '<footer class="text-center text-xs text-gray-500 py-4 mt-auto">
         <p>' . APP_NAME . ' v' . APP_VERSION . ' &copy; ' . date('Y') . '</p>
       </footer>';
+
+// Add PWA script
+echo '<script src="' . $basePath . 'assets/js/pwa.js"></script>';
+
+// Add app.js script
+// echo '<script src="' . $basePath . 'assets/js/app.js"></script>';
 
 // Close HTML tags
 echo '</body></html>';
