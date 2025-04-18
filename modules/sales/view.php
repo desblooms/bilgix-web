@@ -32,20 +32,6 @@ $saleItems = $db->select("SELECT si.*, p.itemName, p.itemCode, p.unitType
                          JOIN products p ON si.productId = p.id 
                          WHERE si.saleId = :saleId", 
                          ['saleId' => $saleId]);
-
-// Check if we need to generate a new invoice (if missing)
-if (!isset($sale['invoicePath']) || empty($sale['invoicePath']) || !file_exists($basePath . $sale['invoicePath'])) {
-    require_once $basePath . 'includes/invoice_generator.php';
-    $invoicePath = generateInvoice($saleId, $db);
-    if ($invoicePath) {
-        // Store invoice path in database
-        $db->update('sales', 
-                    ['invoicePath' => $invoicePath], 
-                    'id = :id', 
-                    ['id' => $saleId]);
-        $sale['invoicePath'] = $invoicePath;
-    }
-}
 ?>
 
 <div class="mb-6">
@@ -123,21 +109,13 @@ if (!isset($sale['invoicePath']) || empty($sale['invoicePath']) || !file_exists(
     </div>
     
     <!-- Action Buttons -->
-    <div class="grid grid-cols-<?= isset($sale['invoicePath']) ? '4' : '3' ?> gap-4">
+    <div class="grid grid-cols-3 gap-4">
         <button id="printButton" class="bg-blue-600 text-white py-2 px-4 rounded-lg flex items-center justify-center">
             <i class="fas fa-print mr-2"></i> Print
         </button>
-        
-        <?php if (isset($sale['invoicePath']) && !empty($sale['invoicePath'])): ?>
-        <a href="<?= $basePath . $sale['invoicePath'] ?>" target="_blank" class="bg-green-600 text-white py-2 px-4 rounded-lg flex items-center justify-center">
-            <i class="fas fa-download mr-2"></i> Invoice
-        </a>
-        <?php endif; ?>
-        
         <a href="edit.php?id=<?= $saleId ?>" class="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg flex items-center justify-center">
             <i class="fas fa-edit mr-2"></i> Edit
         </a>
-        
         <a href="#" class="bg-red-500 text-white py-2 px-4 rounded-lg flex items-center justify-center delete-sale" data-id="<?= $saleId ?>">
             <i class="fas fa-trash mr-2"></i> Delete
         </a>
@@ -173,16 +151,7 @@ if (!isset($sale['invoicePath']) || empty($sale['invoicePath']) || !file_exists(
 <script>
     // Print functionality
     document.getElementById('printButton').addEventListener('click', function() {
-        <?php if (isset($sale['invoicePath']) && !empty($sale['invoicePath'])): ?>
-        // Open invoice in new window for printing
-        const invoiceWindow = window.open('<?= $basePath . $sale['invoicePath'] ?>', '_blank');
-        invoiceWindow.addEventListener('load', function() {
-            invoiceWindow.print();
-        });
-        <?php else: ?>
-        // Use browser's print functionality if no invoice is available
         window.print();
-        <?php endif; ?>
     });
     
     // Delete sale confirmation

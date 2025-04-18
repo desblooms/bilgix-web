@@ -2,7 +2,6 @@
 // Adjust path for includes
 $basePath = '../../';
 include $basePath . 'includes/header.php'; 
-require_once $basePath . 'includes/invoice_generator.php'; // Include invoice generator
 
 // Get all products for dropdown
 $products = getProducts();
@@ -88,28 +87,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $db->insert('inventory_log', $logData);
             }
             
-            // Generate and save invoice
-          // Generate and save invoice
-$invoicePath = generateInvoice($saleId, $db);
-if ($invoicePath) {
-    try {
-        // Store invoice path in database
-        $db->update('sales', 
-                    ['invoicePath' => $invoicePath], 
-                    'id = :id', 
-                    ['id' => $saleId]);
-    } catch (Exception $e) {
-        // Log error but continue - column probably doesn't exist yet
-        error_log('Invoice path update failed: ' . $e->getMessage());
-    }
-}
-            
             // Redirect to sales list with success message
             $_SESSION['message'] = "Sale completed successfully!";
             $_SESSION['message_type'] = "success";
-            
-            // Redirect user to view the sale with the generated invoice
-            redirect($basePath . 'modules/sales/view.php?id=' . $saleId);
+            redirect($basePath . 'modules/sales/list.php');
         } else {
             $errors[] = "Failed to create sale. Please try again.";
         }
