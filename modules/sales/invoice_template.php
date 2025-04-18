@@ -260,8 +260,8 @@
 <body>
     <div class="invoice-header">
         <div>
-            <?php if (file_exists('../../assets/images/logo.png')): ?>
-            <img src="../../assets/images/logo.png" alt="<?php echo COMPANY_NAME; ?>" class="invoice-logo">
+            <?php if (file_exists('../../assets/images/logo.svg')): ?>
+            <img src="../../assets/images/logo.svg" alt="<?php echo COMPANY_NAME; ?>" class="invoice-logo">
             <?php else: ?>
             <div class="invoice-title"><?php echo COMPANY_NAME; ?></div>
             <?php endif; ?>

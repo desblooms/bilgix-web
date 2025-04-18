@@ -2,6 +2,7 @@
 // generate_pdf_invoice.php - Generate PDF Invoice using TCPDF
 // Adjust path for includes
 $basePath = '../../';
+// Use require_once instead of include or require
 require_once $basePath . 'includes/functions.php';
 require_once $basePath . 'includes/db.php';
 require_once $basePath . 'includes/config.php';

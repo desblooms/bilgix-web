@@ -3,9 +3,9 @@
 
 // Adjust path for includes
 $basePath = '../../';
-include $basePath . 'includes/functions.php';
-include $basePath . 'includes/db.php';
-include $basePath . 'includes/config.php';
+require_once $basePath . 'includes/functions.php';
+require_once $basePath . 'includes/db.php';
+require_once $basePath . 'includes/config.php';
 
 // Initialize database connection
 $db = new Database();
