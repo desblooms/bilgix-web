@@ -1,8 +1,8 @@
 -- Database schema for Inventory Manager Mobile App
 
 -- Create database
-CREATE DATABASE IF NOT EXISTS u345095192_avoakbill;
-USE u345095192_avoakbill;
+CREATE DATABASE IF NOT EXISTS u345095192_bilgixdbavoak;
+USE u345095192_bilgixdbavoak;
 
 
 
@@ -179,3 +179,8 @@ CREATE INDEX idx_inventory_log_productid ON inventory_log(productId);
 CREATE INDEX idx_inventory_log_createdat ON inventory_log(createdAt);
 
 
+-- Add invoicePath column to sales table if it doesn't exist
+ALTER TABLE sales ADD COLUMN IF NOT EXISTS invoicePath VARCHAR(255) AFTER paymentStatus;
+
+-- Create invoices directory index protection
+-- Note: This would be implemented in the .htaccess file, not in SQL

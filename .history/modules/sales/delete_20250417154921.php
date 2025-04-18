@@ -21,8 +21,6 @@ if (empty($sale)) {
     redirect($basePath . 'modules/sales/list.php');
 }
 
-$sale = $sale[0];
-
 // Get sale items
 $saleItems = $db->select("SELECT * FROM sale_items WHERE saleId = :saleId", ['saleId' => $saleId]);
 
@@ -59,11 +57,6 @@ try {
             
             $db->insert('inventory_log', $logData);
         }
-    }
-    
-    // Delete the invoice file if it exists
-    if (isset($sale['invoicePath']) && !empty($sale['invoicePath']) && file_exists($basePath . $sale['invoicePath'])) {
-        unlink($basePath . $sale['invoicePath']);
     }
     
     // Delete sale items first (due to foreign key constraint)

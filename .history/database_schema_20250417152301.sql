@@ -177,5 +177,3 @@ CREATE INDEX idx_sales_createdat ON sales(createdAt);
 CREATE INDEX idx_sale_items_productid ON sale_items(productId);
 CREATE INDEX idx_inventory_log_productid ON inventory_log(productId);
 CREATE INDEX idx_inventory_log_createdat ON inventory_log(createdAt);
-
-

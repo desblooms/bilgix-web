@@ -89,20 +89,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             
             // Generate and save invoice
-          // Generate and save invoice
-$invoicePath = generateInvoice($saleId, $db);
-if ($invoicePath) {
-    try {
-        // Store invoice path in database
-        $db->update('sales', 
-                    ['invoicePath' => $invoicePath], 
-                    'id = :id', 
-                    ['id' => $saleId]);
-    } catch (Exception $e) {
-        // Log error but continue - column probably doesn't exist yet
-        error_log('Invoice path update failed: ' . $e->getMessage());
-    }
-}
+            $invoicePath = generateInvoice($saleId, $db);
+            if ($invoicePath) {
+                // Store invoice path in database
+                $db->update('sales', 
+                            ['invoicePath' => $invoicePath], 
+                            'id = :id', 
+                            ['id' => $saleId]);
+            }
             
             // Redirect to sales list with success message
             $_SESSION['message'] = "Sale completed successfully!";
