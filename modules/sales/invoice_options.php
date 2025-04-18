@@ -13,7 +13,7 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 $saleId = (int)$_GET['id'];
 
 // Get sale details
-$sale = $db->select("SELECT s.*, c.name as customerName
+$sale = $db->select("SELECT s.*, c.name as customerName, c.phone as customerPhone
                     FROM sales s 
                     LEFT JOIN customers c ON s.customerId = c.id 
                     WHERE s.id = :id", ['id' => $saleId]);
@@ -117,6 +117,14 @@ $whatsappMsg = urlencode("Hi $customer,\n\nThanks for your purchase! Here's your
                    class="w-full bg-gray-700 text-white py-3 px-4 rounded-lg flex items-center justify-center">
                 <i class="fas fa-link mr-2"></i> Copy Invoice Link
             </button>
+            <?php if (!empty($sale['customerPhone'])): ?>
+    <button id="sendSmsBtn" data-sale-id="<?= $saleId ?>"
+            class="w-full bg-green-700 text-white py-3 px-4 rounded-lg flex items-center justify-center">
+        <i class="fas fa-sms mr-2"></i> Send SMS to <?= $sale['customerPhone'] ?>
+    </button>
+<?php endif; ?>
+
+            
         </div>
     </div>
     
@@ -174,6 +182,35 @@ $whatsappMsg = urlencode("Hi $customer,\n\nThanks for your purchase! Here's your
             console.error('Could not copy text: ', err);
             alert('Failed to copy link. Please try again.');
         });
+    });
+</script>
+<script>
+    document.getElementById('sendSmsBtn')?.addEventListener('click', function () {
+        const button = this;
+        const saleId = button.getAttribute('data-sale-id');
+        button.disabled = true;
+        button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Sending...';
+
+        fetch('send_invoice_sms.php?id=' + saleId)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    button.innerHTML = '<i class="fas fa-check-circle mr-2"></i> SMS Sent!';
+                } else {
+                    button.innerHTML = '<i class="fas fa-exclamation-circle mr-2"></i> Failed to send SMS';
+                    console.error(data.error);
+                }
+            })
+            .catch(error => {
+                button.innerHTML = '<i class="fas fa-exclamation-circle mr-2"></i> Error sending SMS';
+                console.error(error);
+            })
+            .finally(() => {
+                setTimeout(() => {
+                    button.innerHTML = '<i class="fas fa-sms mr-2"></i> Send SMS';
+                    button.disabled = false;
+                }, 3000);
+            });
     });
 </script>
 

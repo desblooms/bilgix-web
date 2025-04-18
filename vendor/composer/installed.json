@@ -1,14 +1,9 @@
 {
-    "_readme": [
-        "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
-        "This file is @generated automatically"
-    ],
-    "content-hash": "87ec40295859de03065214af4d64be24",
     "packages": [
         {
             "name": "setasign/fpdf",
             "version": "1.8.2",
+            "version_normalized": "1.8.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Setasign/FPDF.git",
@@ -20,7 +15,9 @@
                 "reference": "d77904018090c17dc9f3ab6e944679a7a47e710a",
                 "shasum": ""
             },
+            "time": "2019-12-08T10:32:10+00:00",
             "type": "library",
+            "installation-source": "source",
             "autoload": {
                 "classmap": [
                     "fpdf.php"
@@ -46,11 +43,12 @@
             "support": {
                 "source": "https://github.com/Setasign/FPDF/tree/1.8.2"
             },
-            "time": "2019-12-08T10:32:10+00:00"
+            "install-path": "../setasign/fpdf"
         },
         {
             "name": "tecnickcom/tcpdf",
             "version": "6.9.1",
+            "version_normalized": "6.9.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/TCPDF.git",
@@ -66,7 +64,9 @@
                 "ext-curl": "*",
                 "php": ">=7.1.0"
             },
+            "time": "2025-04-03T06:38:07+00:00",
             "type": "library",
+            "installation-source": "source",
             "autoload": {
                 "classmap": [
                     "config",
@@ -117,11 +117,12 @@
                     "type": "custom"
                 }
             ],
-            "time": "2025-04-03T06:38:07+00:00"
+            "install-path": "../tecnickcom/tcpdf"
         },
         {
             "name": "twilio/sdk",
             "version": "8.5.0",
+            "version_normalized": "8.5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twilio/twilio-php.git",
@@ -143,7 +144,9 @@
             "suggest": {
                 "guzzlehttp/guzzle": "An HTTP client to execute the API requests"
             },
+            "time": "2025-04-07T15:34:07+00:00",
             "type": "library",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Twilio\\": "src/Twilio/"
@@ -170,16 +173,9 @@
                 "issues": "https://github.com/twilio/twilio-php/issues",
                 "source": "https://github.com/twilio/twilio-php/tree/8.5.0"
             },
-            "time": "2025-04-07T15:34:07+00:00"
+            "install-path": "../twilio/sdk"
         }
     ],
-    "packages-dev": [],
-    "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": {},
-    "prefer-stable": false,
-    "prefer-lowest": false,
-    "platform": {},
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "dev": true,
+    "dev-package-names": []
 }
