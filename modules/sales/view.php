@@ -109,10 +109,16 @@ $saleItems = $db->select("SELECT si.*, p.itemName, p.itemCode, p.unitType
     </div>
     
     <!-- Action Buttons -->
-    <div class="grid grid-cols-3 gap-4">
-        <button id="printButton" class="bg-blue-600 text-white py-2 px-4 rounded-lg flex items-center justify-center">
-            <i class="fas fa-print mr-2"></i> Print
+    <div class="grid grid-cols-2 gap-4 mb-4">
+        <a href="invoice_options.php?id=<?= $saleId ?>" class="bg-purple-600 text-white py-3 px-4 rounded-lg flex items-center justify-center">
+            <i class="fas fa-file-invoice mr-2"></i> Invoice Options
+        </a>
+        <button id="printButton" class="bg-blue-600 text-white py-3 px-4 rounded-lg flex items-center justify-center">
+            <i class="fas fa-print mr-2"></i> Print This Page
         </button>
+    </div>
+    
+    <div class="grid grid-cols-2 gap-4">
         <a href="edit.php?id=<?= $saleId ?>" class="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg flex items-center justify-center">
             <i class="fas fa-edit mr-2"></i> Edit
         </a>

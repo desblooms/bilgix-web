@@ -8,9 +8,9 @@
 
 // Database configuration
 define('DB_HOST', 'localhost');    
-define('DB_USER', 'u345095192_avoakbill');          
+define('DB_USER', 'u345095192_bilgixavoak');          
 define('DB_PASS', 'Avoak@123');             
-define('DB_NAME', 'u345095192_avoakbill'); 
+define('DB_NAME', 'u345095192_bilgixavoakdb'); 
 
 // Application settings
 define('APP_NAME', 'Billgix');
