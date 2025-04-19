@@ -38,6 +38,28 @@ $purchaseCount = count($purchases);
 foreach ($purchases as $purchase) {
     $totalSpent += $purchase['totalPrice'];
 }
+
+// Calculate current balance
+$currentBalance = $customer['openingBalance'];
+// If balance type is "Due", it's a negative balance for the customer
+if ($customer['balanceType'] == 'Due') {
+    $currentBalance = -$currentBalance;
+}
+
+// Adjust current balance by considering payments and sales
+// Logic: Sales increase the amount owed, payments decrease it
+foreach ($purchases as $purchase) {
+    // If paid/partial, only count the unpaid amount as balance
+    if ($purchase['paymentStatus'] == 'Paid') {
+        // No change to balance - fully paid
+    } else if ($purchase['paymentStatus'] == 'Partial') {
+        // Assume 50% paid for simplicity (you'd need a payments table for exact amounts)
+        $currentBalance -= ($purchase['totalPrice'] * 0.5);
+    } else {
+        // Unpaid - full amount adds to balance
+        $currentBalance -= $purchase['totalPrice'];
+    }
+}
 ?>
 
 <div class="mb-6">
@@ -59,11 +81,14 @@ foreach ($purchases as $purchase) {
                 <?php if (!empty($customer['email'])): ?>
                 <p class="text-sm text-gray-600"><i class="fas fa-envelope mr-1"></i> <?= $customer['email'] ?></p>
                 <?php endif; ?>
+                <?php if (!empty($customer['gstNumber'])): ?>
+                <p class="text-sm text-gray-600 mt-1"><i class="fas fa-file-invoice mr-1"></i> GSTIN: <?= $customer['gstNumber'] ?></p>
+                <?php endif; ?>
                 <?php if (!empty($customer['address'])): ?>
                 <p class="text-sm text-gray-600 mt-2"><i class="fas fa-map-marker-alt mr-1"></i> <?= $customer['address'] ?></p>
                 <?php endif; ?>
             </div>
-            <a href="edit.php?id=<?= $customer['id'] ?>" class="bg-blue-600 text-white py-1 px-3 rounded-lg text-sm">
+            <a href="edit.php?id=<?= $customer['id'] ?>" class="bg-red-900 text-white py-1 px-3 rounded-lg text-sm">
                 <i class="fas fa-edit mr-1"></i> Edit
             </a>
         </div>
@@ -78,6 +103,32 @@ foreach ($purchases as $purchase) {
         <div class="bg-white rounded-lg shadow p-4">
             <h3 class="text-sm text-gray-600 mb-1">Purchases</h3>
             <p class="text-2xl font-bold text-slate-950"><?= $purchaseCount ?></p>
+        </div>
+    </div>
+    
+    <!-- Balance Information -->
+    <div class="bg-white rounded-lg shadow p-4 mb-4">
+        <h3 class="text-md font-medium text-gray-800 mb-2">Balance Information</h3>
+        
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <p class="text-sm text-gray-600">Opening Balance:</p>
+                <p class="font-bold <?= $customer['balanceType'] == 'Advance' ? 'text-green-600' : 'text-red-600' ?>">
+                    <?= $customer['balanceType'] == 'Advance' ? '+' : '-' ?><?= formatCurrency($customer['openingBalance']) ?>
+                </p>
+                <p class="text-xs text-gray-500 mt-1">
+                    <?= $customer['balanceType'] == 'Advance' ? 'Advance Payment' : 'Outstanding' ?>
+                </p>
+            </div>
+            <div>
+                <p class="text-sm text-gray-600">Current Balance:</p>
+                <p class="font-bold <?= $currentBalance >= 0 ? 'text-green-600' : 'text-red-600' ?>">
+                    <?= $currentBalance >= 0 ? '+' : '' ?><?= formatCurrency($currentBalance) ?>
+                </p>
+                <p class="text-xs text-gray-500 mt-1">
+                    <?= $currentBalance >= 0 ? 'Customer is in credit' : 'Customer owes payment' ?>
+                </p>
+            </div>
         </div>
     </div>
     
@@ -101,7 +152,12 @@ foreach ($purchases as $purchase) {
                     </div>
                     <div class="text-right">
                         <p class="font-bold text-green-600"><?= formatCurrency($purchase['totalPrice']) ?></p>
-                        <a href="../sales/view.php?id=<?= $purchase['id'] ?>" class="text-sm text-slate-950">View Details</a>
+                        <span class="text-xs px-2 py-1 rounded-full <?= getPaymentStatusClass($purchase['paymentStatus']) ?>">
+                            <?= $purchase['paymentStatus'] ?>
+                        </span>
+                        <div class="mt-1">
+                            <a href="../sales/view.php?id=<?= $purchase['id'] ?>" class="text-sm text-slate-950">View Details</a>
+                        </div>
                     </div>
                 </div>
             </li>
@@ -116,7 +172,7 @@ foreach ($purchases as $purchase) {
     
     <!-- Action Buttons -->
     <div class="mt-4 grid grid-cols-1 gap-4">
-        <a href="../sales/add.php?customer=<?= $customer['id'] ?>" class="block bg-blue-600 text-white py-2 px-4 rounded-lg text-center">
+        <a href="../sales/add.php?customer=<?= $customer['id'] ?>" class="block bg-red-900 text-white py-2 px-4 rounded-lg text-center">
             <i class="fas fa-cart-plus mr-2"></i> Create New Sale
         </a>
     </div>
@@ -133,7 +189,7 @@ foreach ($purchases as $purchase) {
         <span class="text-xs mt-1">Products</span>
     </a>
     <a href="../sales/add.php" class="flex flex-col items-center p-2 text-gray-600">
-        <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
+        <div class="bg-red-900 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
             <i class="fas fa-plus text-xl"></i>
         </div>
         <span class="text-xs mt-1">New Sale</span>

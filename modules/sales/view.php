@@ -113,7 +113,7 @@ $saleItems = $db->select("SELECT si.*, p.itemName, p.itemCode, p.unitType
         <a href="invoice_options.php?id=<?= $saleId ?>" class="bg-purple-600 text-white py-3 px-4 rounded-lg flex items-center justify-center">
             <i class="fas fa-file-invoice mr-2"></i> Invoice Options
         </a>
-        <button id="printButton" class="bg-blue-600 text-white py-3 px-4 rounded-lg flex items-center justify-center">
+        <button id="printButton" class="bg-red-900 text-white py-3 px-4 rounded-lg flex items-center justify-center">
             <i class="fas fa-print mr-2"></i> Print This Page
         </button>
     </div>
@@ -139,7 +139,7 @@ $saleItems = $db->select("SELECT si.*, p.itemName, p.itemCode, p.unitType
         <span class="text-xs mt-1">Products</span>
     </a>
     <a href="../sales/add.php" class="flex flex-col items-center p-2 text-slate-950">
-        <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
+        <div class="bg-red-900 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
             <i class="fas fa-plus text-xl"></i>
         </div>
         <span class="text-xs mt-1">New Sale</span>

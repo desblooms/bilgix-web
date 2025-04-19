@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form method="POST" class="bg-white rounded-lg shadow p-4">
         <div class="mb-4">
             <label for="categoryId" class="block text-gray-700 font-medium mb-2">Category</label>
-            <select id="categoryId" name="categoryId" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <select id="categoryId" name="categoryId" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900">
                 <option value="">-- Select Category --</option>
                 <?php foreach($categories as $category): ?>
                     <option value="<?= $category['id'] ?>" <?= isset($_POST['categoryId']) && $_POST['categoryId'] == $category['id'] ? 'selected' : '' ?>>
@@ -82,24 +82,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="amount" class="block text-gray-700 font-medium mb-2">Amount *</label>
             <div class="relative">
                 <span class="absolute left-3 top-2"><?= CURRENCY ?></span>
-                <input type="number" id="amount" name="amount" step="0.01" min="0.01" class="w-full pl-8 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required value="<?= isset($_POST['amount']) ? $_POST['amount'] : '' ?>">
+                <input type="number" id="amount" name="amount" step="0.01" min="0.01" class="w-full pl-8 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" required value="<?= isset($_POST['amount']) ? $_POST['amount'] : '' ?>">
             </div>
         </div>
         
         <div class="mb-4">
             <label for="description" class="block text-gray-700 font-medium mb-2">Description *</label>
-            <input type="text" id="description" name="description" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required value="<?= isset($_POST['description']) ? $_POST['description'] : '' ?>">
+            <input type="text" id="description" name="description" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" required value="<?= isset($_POST['description']) ? $_POST['description'] : '' ?>">
         </div>
         
         <div class="grid grid-cols-2 gap-4 mb-4">
             <div>
                 <label for="expenseDate" class="block text-gray-700 font-medium mb-2">Date *</label>
-                <input type="date" id="expenseDate" name="expenseDate" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required value="<?= isset($_POST['expenseDate']) ? $_POST['expenseDate'] : date('Y-m-d') ?>">
+                <input type="date" id="expenseDate" name="expenseDate" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" required value="<?= isset($_POST['expenseDate']) ? $_POST['expenseDate'] : date('Y-m-d') ?>">
             </div>
             
             <div>
                 <label for="paymentMethod" class="block text-gray-700 font-medium mb-2">Payment Method</label>
-                <select id="paymentMethod" name="paymentMethod" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select id="paymentMethod" name="paymentMethod" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900">
                     <option value="Cash" <?= isset($_POST['paymentMethod']) && $_POST['paymentMethod'] == 'Cash' ? 'selected' : '' ?>>Cash</option>
                     <option value="Card" <?= isset($_POST['paymentMethod']) && $_POST['paymentMethod'] == 'Card' ? 'selected' : '' ?>>Card</option>
                     <option value="Bank Transfer" <?= isset($_POST['paymentMethod']) && $_POST['paymentMethod'] == 'Bank Transfer' ? 'selected' : '' ?>>Bank Transfer</option>
@@ -111,12 +111,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         <div class="mb-4">
             <label for="reference" class="block text-gray-700 font-medium mb-2">Reference Number (optional)</label>
-            <input type="text" id="reference" name="reference" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="<?= isset($_POST['reference']) ? $_POST['reference'] : '' ?>">
+            <input type="text" id="reference" name="reference" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" value="<?= isset($_POST['reference']) ? $_POST['reference'] : '' ?>">
             <p class="text-sm text-gray-600 mt-1">e.g., Receipt number, invoice number, etc.</p>
         </div>
         
         <div class="mt-6">
-            <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition">
+            <button type="submit" class="w-full bg-red-900 text-white py-2 px-4 rounded-lg hover:bg-red-900 transition">
                 <i class="fas fa-save mr-2"></i> Save Expense
             </button>
         </div>
@@ -134,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <span class="text-xs mt-1">Products</span>
     </a>
     <a href="../sales/add.php" class="flex flex-col items-center p-2 text-gray-600">
-        <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
+        <div class="bg-red-900 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
             <i class="fas fa-plus text-xl"></i>
         </div>
         <span class="text-xs mt-1">New Sale</span>

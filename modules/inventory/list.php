@@ -26,14 +26,14 @@ if ($filter === 'low') {
 <div class="mb-6">
     <div class="flex justify-between items-center mb-4">
         <h2 class="text-xl font-bold text-gray-800">Inventory</h2>
-        <a href="../products/add.php" class="bg-blue-600 text-white py-2 px-4 rounded-lg text-sm">
+        <a href="../products/add.php" class="bg-red-900 text-white py-2 px-4 rounded-lg text-sm">
             <i class="fas fa-plus mr-1"></i> Add Product
         </a>
     </div>
     
     <!-- Filter Options -->
     <div class="flex overflow-x-auto mb-4 bg-white rounded-lg shadow p-2 no-scrollbar">
-        <a href="?filter=all" class="whitespace-nowrap px-3 py-2 rounded-lg mr-2 <?= $filter === 'all' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700' ?>">
+        <a href="?filter=all" class="whitespace-nowrap px-3 py-2 rounded-lg mr-2 <?= $filter === 'all' ? 'bg-red-900 text-white' : 'bg-gray-200 text-gray-700' ?>">
             All Items
         </a>
         <a href="?filter=low" class="whitespace-nowrap px-3 py-2 rounded-lg mr-2 <?= $filter === 'low' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-700' ?>">
@@ -47,7 +47,7 @@ if ($filter === 'low') {
     <!-- Search Bar -->
     <div class="mb-4">
         <div class="relative">
-            <input type="text" id="searchInput" class="w-full pl-10 pr-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Search inventory...">
+            <input type="text" id="searchInput" class="w-full pl-10 pr-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-red-900" placeholder="Search inventory...">
             <div class="absolute left-3 top-2.5 text-gray-400">
                 <i class="fas fa-search"></i>
             </div>
@@ -90,9 +90,9 @@ if ($filter === 'low') {
     <div class="bg-white rounded-lg shadow p-6 text-center">
         <p class="text-gray-500 mb-4">No inventory items found for this filter</p>
         <?php if ($filter !== 'all'): ?>
-        <a href="?filter=all" class="inline-block bg-blue-600 text-white py-2 px-6 rounded-lg">View All Items</a>
+        <a href="?filter=all" class="inline-block bg-red-900 text-white py-2 px-6 rounded-lg">View All Items</a>
         <?php else: ?>
-        <a href="../products/add.php" class="inline-block bg-blue-600 text-white py-2 px-6 rounded-lg">Add Your First Product</a>
+        <a href="../products/add.php" class="inline-block bg-red-900 text-white py-2 px-6 rounded-lg">Add Your First Product</a>
         <?php endif; ?>
     </div>
     <?php endif; ?>
@@ -109,7 +109,7 @@ if ($filter === 'low') {
         <span class="text-xs mt-1">Products</span>
     </a>
     <a href="../sales/add.php" class="flex flex-col items-center p-2 text-gray-600">
-        <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
+        <div class="bg-red-900 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
             <i class="fas fa-plus text-xl"></i>
         </div>
         <span class="text-xs mt-1">New Sale</span>

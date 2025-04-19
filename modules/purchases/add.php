@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Vendor Selection -->
         <div class="mb-4">
             <label for="vendorId" class="block text-gray-700 font-medium mb-2">Vendor *</label>
-            <select id="vendorId" name="vendorId" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            <select id="vendorId" name="vendorId" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" required>
                 <option value="">-- Select Vendor --</option>
                 <?php foreach($vendors as $vendor): ?>
                     <option value="<?= $vendor['id'] ?>" <?= $selectedVendorId == $vendor['id'] ? 'selected' : '' ?>>
@@ -146,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="border-t pt-4 mt-4">
             <div class="mb-4">
                 <label for="paymentStatus" class="block text-gray-700 font-medium mb-2">Payment Status</label>
-                <select id="paymentStatus" name="paymentStatus" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select id="paymentStatus" name="paymentStatus" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900">
                     <option value="Paid">Paid</option>
                     <option value="Partial">Partial</option>
                     <option value="Unpaid">Unpaid</option>
@@ -180,7 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <span class="text-xs mt-1">Products</span>
     </a>
     <a href="../sales/add.php" class="flex flex-col items-center p-2 text-gray-600">
-        <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
+        <div class="bg-red-900 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
             <i class="fas fa-plus text-xl"></i>
         </div>
         <span class="text-xs mt-1">New Sale</span>

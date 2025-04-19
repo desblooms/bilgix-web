@@ -69,7 +69,7 @@ foreach ($purchases as $purchase) {
                 <p class="text-sm text-gray-600 mt-2"><i class="fas fa-file-invoice mr-1"></i> GST: <?= $vendor['gstNumber'] ?></p>
                 <?php endif; ?>
             </div>
-            <a href="edit.php?id=<?= $vendor['id'] ?>" class="bg-blue-600 text-white py-1 px-3 rounded-lg text-sm">
+            <a href="edit.php?id=<?= $vendor['id'] ?>" class="bg-red-900 text-white py-1 px-3 rounded-lg text-sm">
                 <i class="fas fa-edit mr-1"></i> Edit
             </a>
         </div>
@@ -126,7 +126,7 @@ foreach ($purchases as $purchase) {
     
     <!-- Action Buttons -->
     <div class="mt-4 grid grid-cols-1 gap-4">
-        <a href="../purchases/add.php?vendor=<?= $vendor['id'] ?>" class="block bg-blue-600 text-white py-2 px-4 rounded-lg text-center">
+        <a href="../purchases/add.php?vendor=<?= $vendor['id'] ?>" class="block bg-red-900 text-white py-2 px-4 rounded-lg text-center">
             <i class="fas fa-plus mr-2"></i> Create New Purchase Order
         </a>
     </div>
@@ -143,7 +143,7 @@ foreach ($purchases as $purchase) {
         <span class="text-xs mt-1">Products</span>
     </a>
     <a href="../sales/add.php" class="flex flex-col items-center p-2 text-gray-600">
-        <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
+        <div class="bg-red-900 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
             <i class="fas fa-plus text-xl"></i>
         </div>
         <span class="text-xs mt-1">New Sale</span>

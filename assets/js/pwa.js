@@ -70,13 +70,13 @@ function showInstallButton() {
 function showUpdateNotification() {
     const updateToast = document.createElement('div');
     updateToast.id = 'update-toast';
-    updateToast.className = 'fixed bottom-20 left-0 right-0 mx-auto w-11/12 max-w-md bg-blue-600 text-white p-4 rounded-lg shadow-lg flex justify-between items-center';
+    updateToast.className = 'fixed bottom-20 left-0 right-0 mx-auto w-11/12 max-w-md bg-red-900 text-white p-4 rounded-lg shadow-lg flex justify-between items-center';
     updateToast.innerHTML = `
         <div>
             <p class="font-bold">Update Available</p>
             <p class="text-sm">A new version is available</p>
         </div>
-        <button id="update-button" class="bg-white text-blue-600 py-1 px-4 rounded">
+        <button id="update-button" class="bg-white text-red-900 py-1 px-4 rounded">
             Update
         </button>
     `;

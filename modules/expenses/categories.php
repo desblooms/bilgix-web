@@ -123,12 +123,12 @@ if (isset($_GET['edit']) && !empty($_GET['edit'])) {
             
             <div>
                 <label for="name" class="block text-gray-700 font-medium mb-2">Category Name *</label>
-                <input type="text" id="name" name="name" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required value="<?= $editCategory ? $editCategory['name'] : '' ?>">
+                <input type="text" id="name" name="name" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" required value="<?= $editCategory ? $editCategory['name'] : '' ?>">
             </div>
             
             <div>
                 <label for="description" class="block text-gray-700 font-medium mb-2">Description</label>
-                <textarea id="description" name="description" rows="2" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"><?= $editCategory ? $editCategory['description'] : '' ?></textarea>
+                <textarea id="description" name="description" rows="2" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900"><?= $editCategory ? $editCategory['description'] : '' ?></textarea>
             </div>
             
             <div class="flex justify-end space-x-2">
@@ -138,7 +138,7 @@ if (isset($_GET['edit']) && !empty($_GET['edit'])) {
                 </a>
                 <?php endif; ?>
                 
-                <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition">
+                <button type="submit" class="bg-red-900 text-white py-2 px-4 rounded-lg hover:bg-red-900 transition">
                     <i class="fas fa-save mr-2"></i> <?= $editCategory ? 'Update' : 'Add' ?> Category
                 </button>
             </div>
@@ -202,7 +202,7 @@ if (isset($_GET['edit']) && !empty($_GET['edit'])) {
         <span class="text-xs mt-1">Products</span>
     </a>
     <a href="../sales/add.php" class="flex flex-col items-center p-2 text-gray-600">
-        <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
+        <div class="bg-red-900 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
             <i class="fas fa-plus text-xl"></i>
         </div>
         <span class="text-xs mt-1">New Sale</span>

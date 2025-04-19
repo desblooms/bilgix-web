@@ -55,7 +55,7 @@ $dailySales = $db->select("SELECT
                 <label for="end" class="block text-sm font-medium text-gray-700 mb-1">End Date</label>
                 <input type="date" id="end" name="end" class="w-full p-2 border rounded-lg" value="<?= $endDate ?>">
             </div>
-            <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-lg">
+            <button type="submit" class="bg-red-900 text-white py-2 px-4 rounded-lg">
                 <i class="fas fa-filter mr-2"></i> Apply Filter
             </button>
         </form>
@@ -126,7 +126,7 @@ $dailySales = $db->select("SELECT
         <span class="text-xs mt-1">Products</span>
     </a>
     <a href="../sales/add.php" class="flex flex-col items-center p-2 text-gray-600">
-        <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
+        <div class="bg-red-900 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
             <i class="fas fa-plus text-xl"></i>
         </div>
         <span class="text-xs mt-1">New Sale</span>

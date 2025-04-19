@@ -1,11 +1,8 @@
--- Database schema for Inventory Manager Mobile App
+-- Consolidated Database Schema and Authentication Updates for Inventory Manager Mobile App
 
 -- Create database
 CREATE DATABASE IF NOT EXISTS u345095192_bilgixavoakdb;
 USE u345095192_bilgixavoakdb;
-
-
-
 
 -- Users table for authentication
 CREATE TABLE IF NOT EXISTS users (
@@ -17,7 +14,10 @@ CREATE TABLE IF NOT EXISTS users (
     role ENUM('admin', 'manager', 'staff') NOT NULL DEFAULT 'staff',
     active BOOLEAN NOT NULL DEFAULT TRUE,
     createdAt DATETIME NOT NULL,
-    updatedAt DATETIME
+    updatedAt DATETIME,
+    lastLogin DATETIME NULL,
+    resetToken VARCHAR(64) NULL,
+    resetExpiry DATETIME NULL
 );
 
 -- Vendors table
@@ -149,6 +149,18 @@ CREATE TABLE IF NOT EXISTS inventory_log (
     FOREIGN KEY (userId) REFERENCES users(id) ON DELETE SET NULL
 );
 
+-- Add all necessary indexes to improve query performance
+CREATE INDEX idx_users_email ON users(email);
+CREATE INDEX idx_users_username ON users(username);
+CREATE INDEX idx_users_resetToken ON users(resetToken);
+CREATE INDEX idx_products_vendorid ON products(vendorId);
+CREATE INDEX idx_products_itemcode ON products(itemCode);
+CREATE INDEX idx_sales_customerid ON sales(customerId);
+CREATE INDEX idx_sales_createdat ON sales(createdAt);
+CREATE INDEX idx_sale_items_productid ON sale_items(productId);
+CREATE INDEX idx_inventory_log_productid ON inventory_log(productId);
+CREATE INDEX idx_inventory_log_createdat ON inventory_log(createdAt);
+
 -- Insert default expense categories
 INSERT INTO expense_categories (name, description) VALUES
 ('Rent', 'Office or store rent payments'),
@@ -160,22 +172,19 @@ INSERT INTO expense_categories (name, description) VALUES
 ('Maintenance', 'Equipment and premises maintenance'),
 ('Miscellaneous', 'Other uncategorized expenses');
 
--- Insert default admin user (password: admin123)
-INSERT INTO users (username, password, name, email, role, active, createdAt) VALUES
-('admin', '$2y$10$rBnPNiZCffwOm5l2dAZhTe8QvFojjP4/YpbZH1lz4XSx9ywbZz4m.', 'Admin User', 'admin@example.com', 'admin', TRUE, NOW());
+-- Create default users with secure password hash (password is 'admin123')
+-- Check if there are any users, if not create default admin user
+INSERT INTO users (username, password, name, email, role, active, createdAt)
+SELECT 'admin', '$2y$10$rBnPNiZCffwOm5l2dAZhTe8QvFojjP4/YpbZH1lz4XSx9ywbZz4m.', 'Admin User', 'desblooms@gmail.com', 'admin', TRUE, NOW()
+FROM DUAL
+WHERE NOT EXISTS (SELECT id FROM users LIMIT 1);
 
--- Initial sample data
+
+
+-- Initial sample vendor data
 INSERT INTO vendors (name, contactPerson, phone, email, address, gstNumber, createdAt) VALUES
 ('ABC Suppliers', 'John Smith', '9876543210', 'john@abc.com', '123 Supplier Street', 'GST123456789', NOW()),
 ('XYZ Textiles', 'Jane Doe', '8765432109', 'jane@xyz.com', '456 Textile Road', 'GST987654321', NOW());
 
--- Add index to improve query performance
-CREATE INDEX idx_products_vendorid ON products(vendorId);
-CREATE INDEX idx_products_itemcode ON products(itemCode);
-CREATE INDEX idx_sales_customerid ON sales(customerId);
-CREATE INDEX idx_sales_createdat ON sales(createdAt);
-CREATE INDEX idx_sale_items_productid ON sale_items(productId);
-CREATE INDEX idx_inventory_log_productid ON inventory_log(productId);
-CREATE INDEX idx_inventory_log_createdat ON inventory_log(createdAt);
-
-
+-- Output success message
+SELECT 'Database schema and authentication updates completed successfully' AS Result;

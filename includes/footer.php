@@ -1,5 +1,8 @@
 <?php
 // Close the main div
+if (!isset($basePath)) {
+  $basePath = '';  // Or set a default value based on your project structure
+}
 echo '</main>';
 
 // Add the footer

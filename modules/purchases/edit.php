@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Vendor Selection -->
         <div class="mb-4">
             <label for="vendorId" class="block text-gray-700 font-medium mb-2">Vendor</label>
-            <select id="vendorId" name="vendorId" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <select id="vendorId" name="vendorId" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900">
                 <option value="">-- Select Vendor --</option>
                 <?php foreach($vendors as $vendor): ?>
                     <option value="<?= $vendor['id'] ?>" <?= $purchase['vendorId'] == $vendor['id'] ? 'selected' : '' ?>>
@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Payment Status -->
         <div class="mb-4">
             <label for="paymentStatus" class="block text-gray-700 font-medium mb-2">Payment Status</label>
-            <select id="paymentStatus" name="paymentStatus" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <select id="paymentStatus" name="paymentStatus" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900">
                 <option value="Paid" <?= $purchase['paymentStatus'] == 'Paid' ? 'selected' : '' ?>>Paid</option>
                 <option value="Partial" <?= $purchase['paymentStatus'] == 'Partial' ? 'selected' : '' ?>>Partial</option>
                 <option value="Unpaid" <?= $purchase['paymentStatus'] == 'Unpaid' ? 'selected' : '' ?>>Unpaid</option>
@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         
         <div class="mt-4">
-            <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition">
+            <button type="submit" class="w-full bg-red-900 text-white py-2 px-4 rounded-lg hover:bg-red-900 transition">
                 <i class="fas fa-save mr-2"></i> Update Purchase
             </button>
         </div>
@@ -147,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <span class="text-xs mt-1">Products</span>
     </a>
     <a href="../sales/add.php" class="flex flex-col items-center p-2 text-gray-600">
-        <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
+        <div class="bg-red-900 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
             <i class="fas fa-plus text-xl"></i>
         </div>
         <span class="text-xs mt-1">New Sale</span>

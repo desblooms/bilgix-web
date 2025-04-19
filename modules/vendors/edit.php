@@ -84,38 +84,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form method="POST" class="bg-white rounded-lg shadow p-4">
         <div class="mb-4">
             <label for="name" class="block text-gray-700 font-medium mb-2">Vendor Name *</label>
-            <input type="text" id="name" name="name" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required value="<?= $vendor['name'] ?>">
+            <input type="text" id="name" name="name" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" required value="<?= $vendor['name'] ?>">
         </div>
         
         <div class="mb-4">
             <label for="contactPerson" class="block text-gray-700 font-medium mb-2">Contact Person</label>
-            <input type="text" id="contactPerson" name="contactPerson" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="<?= $vendor['contactPerson'] ?>">
+            <input type="text" id="contactPerson" name="contactPerson" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" value="<?= $vendor['contactPerson'] ?>">
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
                 <label for="phone" class="block text-gray-700 font-medium mb-2">Phone *</label>
-                <input type="tel" id="phone" name="phone" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required value="<?= $vendor['phone'] ?>">
+                <input type="tel" id="phone" name="phone" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" required value="<?= $vendor['phone'] ?>">
             </div>
             
             <div>
                 <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
-                <input type="email" id="email" name="email" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="<?= $vendor['email'] ?>">
+                <input type="email" id="email" name="email" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" value="<?= $vendor['email'] ?>">
             </div>
         </div>
         
         <div class="mb-4">
             <label for="address" class="block text-gray-700 font-medium mb-2">Address</label>
-            <textarea id="address" name="address" rows="3" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"><?= $vendor['address'] ?></textarea>
+            <textarea id="address" name="address" rows="3" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900"><?= $vendor['address'] ?></textarea>
         </div>
         
         <div class="mb-4">
             <label for="gstNumber" class="block text-gray-700 font-medium mb-2">GST Number</label>
-            <input type="text" id="gstNumber" name="gstNumber" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="<?= $vendor['gstNumber'] ?>">
+            <input type="text" id="gstNumber" name="gstNumber" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" value="<?= $vendor['gstNumber'] ?>">
         </div>
         
         <div class="mt-6">
-            <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition">
+            <button type="submit" class="w-full bg-red-900 text-white py-2 px-4 rounded-lg hover:bg-red-900 transition">
                 <i class="fas fa-save mr-2"></i> Update Vendor
             </button>
         </div>
@@ -140,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <span class="text-xs mt-1">Products</span>
     </a>
     <a href="../sales/add.php" class="flex flex-col items-center p-2 text-gray-600">
-        <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
+        <div class="bg-red-900 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
             <i class="fas fa-plus text-xl"></i>
         </div>
         <span class="text-xs mt-1">New Sale</span>

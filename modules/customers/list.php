@@ -10,7 +10,7 @@ $customers = $db->select("SELECT * FROM customers ORDER BY name ASC");
 <div class="mb-6">
     <div class="flex justify-between items-center mb-4">
         <h2 class="text-xl font-bold text-gray-800">Customers</h2>
-        <a href="add.php" class="bg-blue-600 text-white py-2 px-4 rounded-lg text-sm">
+        <a href="add.php" class="bg-red-900 text-white py-2 px-4 rounded-lg text-sm">
             <i class="fas fa-plus mr-1"></i> Add New
         </a>
     </div>
@@ -31,18 +31,31 @@ $customers = $db->select("SELECT * FROM customers ORDER BY name ASC");
         <ul class="divide-y" id="customerList">
             <?php foreach($customers as $customer): ?>
             <li class="p-4">
-                <div class="flex justify-between items-center">
+                <div class="flex justify-between items-start">
                     <div>
                         <p class="font-medium"><?= $customer['name'] ?></p>
                         <p class="text-sm text-gray-600"><?= $customer['phone'] ?></p>
+                        <?php if (!empty($customer['gstNumber'])): ?>
+                        <p class="text-sm text-gray-600">GSTIN: <?= $customer['gstNumber'] ?></p>
+                        <?php endif; ?>
                     </div>
-                    <div class="flex space-x-2">
-                        <a href="edit.php?id=<?= $customer['id'] ?>" class="text-slate-950">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <a href="#" class="text-red-600 delete-customer" data-id="<?= $customer['id'] ?>">
-                            <i class="fas fa-trash"></i>
-                        </a>
+                    <div class="text-right">
+                        <?php if ($customer['openingBalance'] > 0): ?>
+                            <p class="font-bold <?= $customer['balanceType'] == 'Advance' ? 'text-green-600' : 'text-red-600' ?>">
+                                <?= $customer['balanceType'] == 'Advance' ? '+' : '-' ?><?= formatCurrency($customer['openingBalance']) ?>
+                            </p>
+                        <?php endif; ?>
+                        <div class="flex space-x-3 mt-1">
+                            <a href="view.php?id=<?= $customer['id'] ?>" class="text-red-900">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="edit.php?id=<?= $customer['id'] ?>" class="text-slate-950">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="#" class="text-red-600 delete-customer" data-id="<?= $customer['id'] ?>">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </li>
@@ -52,7 +65,7 @@ $customers = $db->select("SELECT * FROM customers ORDER BY name ASC");
     <?php else: ?>
     <div class="bg-white rounded-lg shadow p-6 text-center">
         <p class="text-gray-500 mb-4">No customers found</p>
-        <a href="add.php" class="inline-block bg-blue-600 text-white py-2 px-6 rounded-lg">Add Your First Customer</a>
+        <a href="add.php" class="inline-block bg-red-900 text-white py-2 px-6 rounded-lg">Add Your First Customer</a>
     </div>
     <?php endif; ?>
 </div>
@@ -68,7 +81,7 @@ $customers = $db->select("SELECT * FROM customers ORDER BY name ASC");
         <span class="text-xs mt-1">Products</span>
     </a>
     <a href="../sales/add.php" class="flex flex-col items-center p-2 text-gray-600">
-        <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
+        <div class="bg-red-900 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
             <i class="fas fa-plus text-xl"></i>
         </div>
         <span class="text-xs mt-1">New Sale</span>
@@ -93,10 +106,9 @@ $customers = $db->select("SELECT * FROM customers ORDER BY name ASC");
         const searchTerm = this.value.toLowerCase();
         
         customerItems.forEach(item => {
-            const customerName = item.querySelector('.font-medium').textContent.toLowerCase();
-            const customerPhone = item.querySelector('.text-gray-600').textContent.toLowerCase();
+            const customerInfo = item.textContent.toLowerCase();
             
-            if (customerName.includes(searchTerm) || customerPhone.includes(searchTerm)) {
+            if (customerInfo.includes(searchTerm)) {
                 item.style.display = '';
             } else {
                 item.style.display = 'none';
@@ -119,8 +131,6 @@ $customers = $db->select("SELECT * FROM customers ORDER BY name ASC");
 </script>
 
 <?php
-// Close the main div and add the footer
-
-// Include footer (which contains ob_end_flush())
+// Include footer
 include $basePath . 'includes/footer.php';
 ?>

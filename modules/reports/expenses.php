@@ -65,7 +65,7 @@ $dailyExpenses = $db->select("SELECT
                 <label for="end" class="block text-sm font-medium text-gray-700 mb-1">End Date</label>
                 <input type="date" id="end" name="end" class="w-full p-2 border rounded-lg" value="<?= $endDate ?>">
             </div>
-            <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-lg">
+            <button type="submit" class="bg-red-900 text-white py-2 px-4 rounded-lg">
                 <i class="fas fa-filter mr-2"></i> Apply Filter
             </button>
         </form>
@@ -107,7 +107,7 @@ $dailyExpenses = $db->select("SELECT
         
         <div class="p-4">
             <div class="relative">
-                <input type="text" id="searchInput" class="w-full pl-10 pr-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Search expenses...">
+                <input type="text" id="searchInput" class="w-full pl-10 pr-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-red-900" placeholder="Search expenses...">
                 <div class="absolute left-3 top-2.5 text-gray-400">
                     <i class="fas fa-search"></i>
                 </div>
@@ -143,7 +143,7 @@ $dailyExpenses = $db->select("SELECT
     
     <!-- Add Expense Button -->
     <div class="mt-4">
-        <a href="../expenses/add.php" class="block w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-center shadow-lg">
+        <a href="../expenses/add.php" class="block w-full bg-red-900 text-white py-3 px-4 rounded-lg text-center shadow-lg">
             <i class="fas fa-plus-circle mr-2"></i> Add New Expense
         </a>
     </div>
@@ -160,7 +160,7 @@ $dailyExpenses = $db->select("SELECT
         <span class="text-xs mt-1">Products</span>
     </a>
     <a href="../sales/add.php" class="flex flex-col items-center p-2 text-gray-600">
-        <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
+        <div class="bg-red-900 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
             <i class="fas fa-plus text-xl"></i>
         </div>
         <span class="text-xs mt-1">New Sale</span>

@@ -218,17 +218,33 @@ $pdf->Cell(90, 5, '', 0, 1, 'R');
 
 // ---------------------------------------------------------
 
-// Close and output PDF document
+// Generate PDF filename
 $pdf_filename = 'Invoice_' . $sale['invoiceNumber'] . '.pdf';
 
 // Check if direct output or download
 $action = isset($_GET['action']) ? $_GET['action'] : 'download';
 
+// Clear any previous output
+if (ob_get_length()) ob_clean();
+
+// Set appropriate headers based on action
 if ($action === 'view') {
     // Output PDF to browser for viewing
+    header('Content-Type: application/pdf');
+    header('Content-Disposition: inline; filename="' . $pdf_filename . '"');
+    header('Cache-Control: private, max-age=0, must-revalidate');
+    header('Pragma: public');
     $pdf->Output($pdf_filename, 'I');
 } else {
-    // Default: offer as download
+    // Force download headers - improved for mobile compatibility
+    header('Content-Type: application/pdf');
+    header('Content-Disposition: attachment; filename="' . $pdf_filename . '"');
+    header('Content-Transfer-Encoding: binary');
+    header('Content-Description: File Transfer');
+    header('Cache-Control: public, must-revalidate, max-age=0');
+    header('Pragma: public');
+    header('Expires: 0');
     $pdf->Output($pdf_filename, 'D');
 }
+exit();
 ?>

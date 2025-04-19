@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Vendor Selection -->
         <div class="mb-4">
             <label for="vendorId" class="block text-gray-700 font-medium mb-2">Select Vendor</label>
-            <select id="vendorId" name="vendorId" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <select id="vendorId" name="vendorId" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900">
                 <option value="">-- Select Vendor --</option>
                 <?php foreach($vendors as $vendor): ?>
                     <option value="<?= $vendor['id'] ?>" <?= isset($_POST['vendorId']) && $_POST['vendorId'] == $vendor['id'] ? 'selected' : '' ?>>
@@ -120,24 +120,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
                 <label for="itemCode" class="block text-gray-700 font-medium mb-2">Item Code *</label>
-                <input type="text" id="itemCode" name="itemCode" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required value="<?= isset($_POST['itemCode']) ? $_POST['itemCode'] : '' ?>">
+                <input type="text" id="itemCode" name="itemCode" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" required value="<?= isset($_POST['itemCode']) ? $_POST['itemCode'] : '' ?>">
             </div>
             
             <div>
                 <label for="itemName" class="block text-gray-700 font-medium mb-2">Item Name *</label>
-                <input type="text" id="itemName" name="itemName" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required value="<?= isset($_POST['itemName']) ? $_POST['itemName'] : '' ?>">
+                <input type="text" id="itemName" name="itemName" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" required value="<?= isset($_POST['itemName']) ? $_POST['itemName'] : '' ?>">
             </div>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
                 <label for="hsn" class="block text-gray-700 font-medium mb-2">HSN Code</label>
-                <input type="text" id="hsn" name="hsn" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="<?= isset($_POST['hsn']) ? $_POST['hsn'] : '' ?>">
+                <input type="text" id="hsn" name="hsn" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" value="<?= isset($_POST['hsn']) ? $_POST['hsn'] : '' ?>">
             </div>
             
             <div>
                 <label for="unitType" class="block text-gray-700 font-medium mb-2">Unit Type</label>
-                <select id="unitType" name="unitType" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select id="unitType" name="unitType" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900">
                     <option value="Meter" <?= isset($_POST['unitType']) && $_POST['unitType'] == 'Meter' ? 'selected' : '' ?>>Meter</option>
                     <option value="Piece" <?= isset($_POST['unitType']) && $_POST['unitType'] == 'Piece' ? 'selected' : '' ?>>Piece</option>
                     <option value="Kg" <?= isset($_POST['unitType']) && $_POST['unitType'] == 'Kg' ? 'selected' : '' ?>>Kg</option>
@@ -153,46 +153,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
                     <label for="priceUnit" class="block text-gray-700 font-medium mb-2">Price/Unit (Purchase Price) *</label>
-                    <input type="number" id="priceUnit" name="priceUnit" step="0.01" min="0" class="calculation-input w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required value="<?= isset($_POST['priceUnit']) ? $_POST['priceUnit'] : '' ?>">
+                    <input type="number" id="priceUnit" name="priceUnit" step="0.01" min="0" class="calculation-input w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" required value="<?= isset($_POST['priceUnit']) ? $_POST['priceUnit'] : '' ?>">
                 </div>
                 
                 <div>
                     <label for="qty" class="block text-gray-700 font-medium mb-2">Quantity</label>
-                    <input type="number" id="qty" name="qty" min="0" class="calculation-input w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="<?= isset($_POST['qty']) ? $_POST['qty'] : '0' ?>">
+                    <input type="number" id="qty" name="qty" min="0" class="calculation-input w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" value="<?= isset($_POST['qty']) ? $_POST['qty'] : '0' ?>">
                 </div>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                 <div>
                     <label for="totalPrice" class="block text-gray-700 font-medium mb-2">Total Price</label>
-                    <input type="number" id="totalPrice" name="totalPrice" step="0.01" min="0" class="calculation-input w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100" readonly value="<?= isset($_POST['totalPrice']) ? $_POST['totalPrice'] : '0' ?>">
+                    <input type="number" id="totalPrice" name="totalPrice" step="0.01" min="0" class="calculation-input w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900 bg-gray-100" readonly value="<?= isset($_POST['totalPrice']) ? $_POST['totalPrice'] : '0' ?>">
                 </div>
                 
                 <div>
                     <label for="expense" class="block text-gray-700 font-medium mb-2">Expense</label>
-                    <input type="number" id="expense" name="expense" step="0.01" min="0" class="calculation-input w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="<?= isset($_POST['expense']) ? $_POST['expense'] : '0' ?>">
+                    <input type="number" id="expense" name="expense" step="0.01" min="0" class="calculation-input w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" value="<?= isset($_POST['expense']) ? $_POST['expense'] : '0' ?>">
                 </div>
                 
                 <div>
                     <label for="shippingCost" class="block text-gray-700 font-medium mb-2">Shipping Cost</label>
-                    <input type="number" id="shippingCost" name="shippingCost" step="0.01" min="0" class="calculation-input w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="<?= isset($_POST['shippingCost']) ? $_POST['shippingCost'] : '0' ?>">
+                    <input type="number" id="shippingCost" name="shippingCost" step="0.01" min="0" class="calculation-input w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" value="<?= isset($_POST['shippingCost']) ? $_POST['shippingCost'] : '0' ?>">
                 </div>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                 <div>
                     <label for="gst" class="block text-gray-700 font-medium mb-2">GST (%)</label>
-                    <input type="number" id="gst" name="gst" step="0.01" min="0" class="calculation-input w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="<?= isset($_POST['gst']) ? $_POST['gst'] : '0' ?>">
+                    <input type="number" id="gst" name="gst" step="0.01" min="0" class="calculation-input w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" value="<?= isset($_POST['gst']) ? $_POST['gst'] : '0' ?>">
                 </div>
                 
                 <div>
                     <label for="totalProductCost" class="block text-gray-700 font-medium mb-2">Total Product Cost</label>
-                    <input type="number" id="totalProductCost" name="totalProductCost" step="0.01" min="0" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100" readonly value="<?= isset($_POST['totalProductCost']) ? $_POST['totalProductCost'] : '0' ?>">
+                    <input type="number" id="totalProductCost" name="totalProductCost" step="0.01" min="0" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900 bg-gray-100" readonly value="<?= isset($_POST['totalProductCost']) ? $_POST['totalProductCost'] : '0' ?>">
                 </div>
                 
                 <div>
                     <label for="salePrice" class="block text-gray-700 font-medium mb-2">Sale Price (per <span id="unitTypeLabel">Meter</span>) *</label>
-                    <input type="number" id="salePrice" name="salePrice" step="0.01" min="0" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required value="<?= isset($_POST['salePrice']) ? $_POST['salePrice'] : '' ?>">
+                    <input type="number" id="salePrice" name="salePrice" step="0.01" min="0" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" required value="<?= isset($_POST['salePrice']) ? $_POST['salePrice'] : '' ?>">
                 </div>
             </div>
             
@@ -210,7 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         
         <div class="mt-6">
-            <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition">
+            <button type="submit" class="w-full bg-red-900 text-white py-2 px-4 rounded-lg hover:bg-red-900 transition">
                 <i class="fas fa-save mr-2"></i> Save Product
             </button>
         </div>
@@ -228,7 +228,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <span class="text-xs mt-1">Products</span>
     </a>
     <a href="../sales/add.php" class="flex flex-col items-center p-2 text-gray-600">
-        <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
+        <div class="bg-red-900 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
             <i class="fas fa-plus text-xl"></i>
         </div>
         <span class="text-xs mt-1">New Sale</span>

@@ -75,7 +75,7 @@ $salesHistory = $db->select("SELECT si.*, s.invoiceNumber, s.createdAt, c.name a
     
     <!-- Quick Actions -->
     <div class="grid grid-cols-2 gap-4 mb-4">
-        <a href="edit.php?id=<?= $productId ?>" class="bg-blue-600 text-white py-2 px-4 rounded-lg text-center">
+        <a href="edit.php?id=<?= $productId ?>" class="bg-red-900 text-white py-2 px-4 rounded-lg text-center">
             <i class="fas fa-edit mr-2"></i> Edit Product
         </a>
         <a href="../inventory/adjust.php?id=<?= $productId ?>" class="bg-green-600 text-white py-2 px-4 rounded-lg text-center">
@@ -169,7 +169,7 @@ $salesHistory = $db->select("SELECT si.*, s.invoiceNumber, s.createdAt, c.name a
         <span class="text-xs mt-1">Products</span>
     </a>
     <a href="../sales/add.php" class="flex flex-col items-center p-2 text-gray-600">
-        <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
+        <div class="bg-red-900 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
             <i class="fas fa-plus text-xl"></i>
         </div>
         <span class="text-xs mt-1">New Sale</span>

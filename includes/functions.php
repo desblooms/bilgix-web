@@ -19,6 +19,92 @@ function isLoggedIn() {
     return isset($_SESSION['user_id']);
 }
 
+// Check user role
+function hasRole($role) {
+    return (isset($_SESSION['user_role']) && $_SESSION['user_role'] === $role);
+}
+
+// Check if user has admin privileges
+function isAdmin() {
+    return hasRole('admin');
+}
+
+// Check if user has at least manager privileges
+function isManagerOrAdmin() {
+    return (hasRole('admin') || hasRole('manager'));
+}
+
+// Get current user ID
+function getCurrentUserId() {
+    return $_SESSION['user_id'] ?? null;
+}
+
+// Get current user details
+function getCurrentUser() {
+    if (!isLoggedIn()) {
+        return null;
+    }
+    
+    global $db;
+    $user = $db->select("SELECT id, username, name, email, role FROM users WHERE id = :id", 
+                        ['id' => $_SESSION['user_id']]);
+                        
+    return $user[0] ?? null;
+}
+
+// Generate a random token
+function generateToken($length = 32) {
+    return bin2hex(random_bytes($length / 2));
+}
+
+// Validate email format
+function isValidEmail($email) {
+    return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
+}
+
+// Verify CSRF token
+function verifyCSRFToken($token) {
+    return (isset($_SESSION['csrf_token']) && $token === $_SESSION['csrf_token']);
+}
+
+// Generate CSRF token
+function generateCSRFToken() {
+    if (!isset($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['csrf_token'];
+}
+
+// Get CSRF token input field
+function csrfTokenField() {
+    $token = generateCSRFToken();
+    return '<input type="hidden" name="csrf_token" value="' . $token . '">';
+}
+
+// Check authorization for resource
+function checkAuthorization($requiredRole = 'staff') {
+    if (!isLoggedIn()) {
+        $_SESSION['message'] = "Please login to access this resource";
+        $_SESSION['message_type'] = "error";
+        redirect('login.php');
+        exit;
+    }
+    
+    if ($requiredRole === 'admin' && !isAdmin()) {
+        $_SESSION['message'] = "You don't have permission to access this resource";
+        $_SESSION['message_type'] = "error";
+        redirect('index.php');
+        exit;
+    }
+    
+    if ($requiredRole === 'manager' && !isManagerOrAdmin()) {
+        $_SESSION['message'] = "You don't have permission to access this resource";
+        $_SESSION['message_type'] = "error";
+        redirect('index.php');
+        exit;
+    }
+}
+
 // Modified redirect function to handle headers already sent
 function redirect($url) {
     // Check if headers already sent
@@ -83,4 +169,3 @@ function getPaymentStatusClass($status) {
             return 'bg-gray-100 text-gray-800';
     }
 }
-?>

@@ -40,7 +40,7 @@ $sale = $sale[0];
 
 // Twilio credentials (use env or config securely)
 $sid    = 'AC38a6a38a7d0171b3f66d33c26f9f9879';
-$token  = '03b9f0ecf4d76e405e1081fdf4cd5056';
+$token  = '3ef574170e77450077a3b97db1748678';
 $from   = '+16503183253';
 $to     = $sale['customerPhone'];
 $invoiceUrl = 'https://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/print_invoice.php?id=' . $saleId;

@@ -13,7 +13,7 @@ $purchases = $db->select("SELECT p.*, v.name as vendorName
 <div class="mb-6">
     <div class="flex justify-between items-center mb-4">
         <h2 class="text-xl font-bold text-gray-800">Purchases</h2>
-        <a href="add.php" class="bg-blue-600 text-white py-2 px-4 rounded-lg text-sm">
+        <a href="add.php" class="bg-red-900 text-white py-2 px-4 rounded-lg text-sm">
             <i class="fas fa-plus mr-1"></i> New Purchase
         </a>
     </div>
@@ -22,7 +22,7 @@ $purchases = $db->select("SELECT p.*, v.name as vendorName
     <div class="bg-white rounded-lg shadow mb-4 p-3">
         <div class="flex items-center text-sm overflow-x-auto no-scrollbar">
             <span class="mr-2">Filter:</span>
-            <button class="px-3 py-1 bg-blue-600 text-white rounded-lg mr-2">All</button>
+            <button class="px-3 py-1 bg-red-900 text-white rounded-lg mr-2">All</button>
             <button class="px-3 py-1 bg-gray-200 rounded-lg mr-2">Today</button>
             <button class="px-3 py-1 bg-gray-200 rounded-lg mr-2">This Week</button>
             <button class="px-3 py-1 bg-gray-200 rounded-lg">This Month</button>
@@ -32,7 +32,7 @@ $purchases = $db->select("SELECT p.*, v.name as vendorName
     <!-- Search Bar -->
     <div class="mb-4">
         <div class="relative">
-            <input type="text" id="searchInput" class="w-full pl-10 pr-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Search purchase number or vendor...">
+            <input type="text" id="searchInput" class="w-full pl-10 pr-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-red-900" placeholder="Search purchase number or vendor...">
             <div class="absolute left-3 top-2.5 text-gray-400">
                 <i class="fas fa-search"></i>
             </div>
@@ -72,7 +72,7 @@ $purchases = $db->select("SELECT p.*, v.name as vendorName
     <?php else: ?>
     <div class="bg-white rounded-lg shadow p-6 text-center">
         <p class="text-gray-500 mb-4">No purchases found</p>
-        <a href="add.php" class="inline-block bg-blue-600 text-white py-2 px-6 rounded-lg">Create Your First Purchase</a>
+        <a href="add.php" class="inline-block bg-red-900 text-white py-2 px-6 rounded-lg">Create Your First Purchase</a>
     </div>
     <?php endif; ?>
 </div>
@@ -88,7 +88,7 @@ $purchases = $db->select("SELECT p.*, v.name as vendorName
         <span class="text-xs mt-1">Products</span>
     </a>
     <a href="../sales/add.php" class="flex flex-col items-center p-2 text-gray-600">
-        <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
+        <div class="bg-red-900 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
             <i class="fas fa-plus text-xl"></i>
         </div>
         <span class="text-xs mt-1">New Sale</span>
@@ -126,20 +126,20 @@ $purchases = $db->select("SELECT p.*, v.name as vendorName
     
     // Filter functionality (for demonstration)
     document.addEventListener('DOMContentLoaded', function() {
-        const filterButtons = document.querySelectorAll('.bg-gray-200, .bg-blue-600');
+        const filterButtons = document.querySelectorAll('.bg-gray-200, .bg-red-900');
         
         filterButtons.forEach(button => {
             button.addEventListener('click', function() {
                 // Reset all buttons
                 filterButtons.forEach(btn => {
-                    btn.classList.remove('bg-blue-600');
+                    btn.classList.remove('bg-red-900');
                     btn.classList.remove('text-white');
                     btn.classList.add('bg-gray-200');
                 });
                 
                 // Highlight selected button
                 this.classList.remove('bg-gray-200');
-                this.classList.add('bg-blue-600');
+                this.classList.add('bg-red-900');
                 this.classList.add('text-white');
                 
                 // Here you would implement actual filtering based on selection

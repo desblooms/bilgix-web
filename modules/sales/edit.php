@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Customer Selection -->
         <div class="mb-4">
             <label for="customerId" class="block text-gray-700 font-medium mb-2">Customer</label>
-            <select id="customerId" name="customerId" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <select id="customerId" name="customerId" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900">
                 <option value="">Walk-in Customer</option>
                 <?php foreach($customers as $customer): ?>
                     <option value="<?= $customer['id'] ?>" <?= $sale['customerId'] == $customer['id'] ? 'selected' : '' ?>>
@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="grid grid-cols-2 gap-4 mb-4">
             <div>
                 <label for="paymentMethod" class="block text-gray-700 font-medium mb-2">Payment Method</label>
-                <select id="paymentMethod" name="paymentMethod" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select id="paymentMethod" name="paymentMethod" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900">
                     <option value="Cash" <?= $sale['paymentMethod'] == 'Cash' ? 'selected' : '' ?>>Cash</option>
                     <option value="Card" <?= $sale['paymentMethod'] == 'Card' ? 'selected' : '' ?>>Card</option>
                     <option value="Bank Transfer" <?= $sale['paymentMethod'] == 'Bank Transfer' ? 'selected' : '' ?>>Bank Transfer</option>
@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div>
                 <label for="paymentStatus" class="block text-gray-700 font-medium mb-2">Payment Status</label>
-                <select id="paymentStatus" name="paymentStatus" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select id="paymentStatus" name="paymentStatus" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900">
                     <option value="Paid" <?= $sale['paymentStatus'] == 'Paid' ? 'selected' : '' ?>>Paid</option>
                     <option value="Partial" <?= $sale['paymentStatus'] == 'Partial' ? 'selected' : '' ?>>Partial</option>
                     <option value="Unpaid" <?= $sale['paymentStatus'] == 'Unpaid' ? 'selected' : '' ?>>Unpaid</option>
@@ -143,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         
         <div class="mt-4">
-            <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition">
+            <button type="submit" class="w-full bg-red-900 text-white py-2 px-4 rounded-lg hover:bg-red-900 transition">
                 <i class="fas fa-save mr-2"></i> Update Sale
             </button>
         </div>
@@ -161,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <span class="text-xs mt-1">Products</span>
     </a>
     <a href="../sales/add.php" class="flex flex-col items-center p-2 text-slate-950">
-        <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
+        <div class="bg-red-900 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
             <i class="fas fa-plus text-xl"></i>
         </div>
         <span class="text-xs mt-1">New Sale</span>

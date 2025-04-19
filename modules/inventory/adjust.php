@@ -138,13 +138,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         <div class="mb-4">
             <label for="adjustmentQty" class="block text-gray-700 font-medium mb-2">Quantity</label>
-            <input type="number" id="adjustmentQty" name="adjustmentQty" min="1" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required value="1">
+            <input type="number" id="adjustmentQty" name="adjustmentQty" min="1" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" required value="1">
             <p class="text-sm text-gray-600 mt-1">Enter the number of <?= $product['unitType'] ?> to add/remove</p>
         </div>
         
         <div class="mb-4">
             <label for="reason" class="block text-gray-700 font-medium mb-2">Reason</label>
-            <select id="reason" name="reason" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <select id="reason" name="reason" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900">
                 <option value="Purchase">New Purchase</option>
                 <option value="Return">Customer Return</option>
                 <option value="Adjustment">Manual Adjustment</option>
@@ -156,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         
         <div class="mt-6">
-            <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition">
+            <button type="submit" class="w-full bg-red-900 text-white py-2 px-4 rounded-lg hover:bg-red-900 transition">
                 <i class="fas fa-sync-alt mr-2"></i> Adjust Inventory
             </button>
         </div>
@@ -174,7 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <span class="text-xs mt-1">Products</span>
     </a>
     <a href="../sales/add.php" class="flex flex-col items-center p-2 text-gray-600">
-        <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
+        <div class="bg-red-900 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
             <i class="fas fa-plus text-xl"></i>
         </div>
         <span class="text-xs mt-1">New Sale</span>

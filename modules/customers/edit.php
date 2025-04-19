@@ -29,6 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = sanitize($_POST['phone']);
     $email = sanitize($_POST['email']);
     $address = sanitize($_POST['address']);
+    $gstNumber = sanitize($_POST['gstNumber']);
+    $openingBalance = !empty($_POST['openingBalance']) ? floatval($_POST['openingBalance']) : 0;
+    $balanceType = sanitize($_POST['balanceType']);
     
     // Validation
     $errors = [];
@@ -42,6 +45,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'phone' => $phone,
             'email' => $email,
             'address' => $address,
+            'gstNumber' => $gstNumber,
+            'openingBalance' => $openingBalance,
+            'balanceType' => $balanceType,
             'updatedAt' => date('Y-m-d H:i:s')
         ];
         
@@ -92,18 +98,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
             <input type="email" id="email" name="email" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="<?= $customer['email'] ?>">
         </div>
+
+        <div class="mb-4">
+            <label for="gstNumber" class="block text-gray-700 font-medium mb-2">GSTIN</label>
+            <input type="text" id="gstNumber" name="gstNumber" maxlength="15" pattern="^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$" title="Please enter a valid GSTIN (e.g., 22AAAAA0000A1Z5)" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="<?= $customer['gstNumber'] ?>">
+            <p class="text-xs text-gray-500 mt-1">Format: 22AAAAA0000A1Z5</p>
+        </div>
         
         <div class="mb-4">
             <label for="address" class="block text-gray-700 font-medium mb-2">Address</label>
             <textarea id="address" name="address" rows="3" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"><?= $customer['address'] ?></textarea>
         </div>
         
+        <!-- Opening Balance Section -->
+        <div class="border-t border-gray-200 pt-4 mt-4 mb-4">
+            <h3 class="text-md font-medium text-gray-700 mb-3">Opening Balance</h3>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="openingBalance" class="block text-gray-700 font-medium mb-2">Amount</label>
+                    <div class="relative">
+                        <span class="absolute left-3 top-2"><?= CURRENCY ?></span>
+                        <input type="number" id="openingBalance" name="openingBalance" step="0.01" min="0" class="w-full pl-8 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="<?= $customer['openingBalance'] ?>">
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="balanceType" class="block text-gray-700 font-medium mb-2">Type</label>
+                    <select id="balanceType" name="balanceType" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="Advance" <?= $customer['balanceType'] == 'Advance' ? 'selected' : '' ?>>Advance Payment</option>
+                        <option value="Due" <?= $customer['balanceType'] == 'Due' ? 'selected' : '' ?>>Outstanding Balance</option>
+                    </select>
+                </div>
+            </div>
+            <p class="text-xs text-gray-500 mt-2">
+                <span class="text-yellow-600"><i class="fas fa-info-circle mr-1"></i></span>
+                Select "Advance Payment" if customer has pre-paid, or "Outstanding Balance" if they owe you money.
+            </p>
+        </div>
+        
         <div class="mt-6">
-            <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition">
+            <button type="submit" class="w-full bg-red-900 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition">
                 <i class="fas fa-save mr-2"></i> Update Customer
             </button>
         </div>
     </form>
+    
+    <!-- Customer Sales History Link -->
+    <div class="mt-4">
+        <a href="view.php?id=<?= $customerId ?>" class="block text-center bg-gray-200 text-gray-800 py-2 px-4 rounded-lg">
+            <i class="fas fa-history mr-2"></i> View Customer Details & History
+        </a>
+    </div>
 </div>
 
 <!-- Bottom Navigation -->
@@ -117,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <span class="text-xs mt-1">Products</span>
     </a>
     <a href="../sales/add.php" class="flex flex-col items-center p-2 text-gray-600">
-        <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
+        <div class="bg-red-900 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
             <i class="fas fa-plus text-xl"></i>
         </div>
         <span class="text-xs mt-1">New Sale</span>
@@ -133,8 +179,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </nav>
 
 <?php
-// Close the main div and add the footer
-
-// Include footer (which contains ob_end_flush())
+// Include footer
 include $basePath . 'includes/footer.php';
 ?>

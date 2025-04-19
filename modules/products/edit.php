@@ -110,35 +110,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form method="POST" class="bg-white rounded-lg shadow p-4">
         <div class="mb-4">
             <label for="itemCode" class="block text-gray-700 font-medium mb-2">Item Code *</label>
-            <input type="text" id="itemCode" name="itemCode" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required value="<?= $product['itemCode'] ?>">
+            <input type="text" id="itemCode" name="itemCode" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" required value="<?= $product['itemCode'] ?>">
         </div>
         
         <div class="mb-4">
             <label for="itemName" class="block text-gray-700 font-medium mb-2">Item Name *</label>
-            <input type="text" id="itemName" name="itemName" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required value="<?= $product['itemName'] ?>">
+            <input type="text" id="itemName" name="itemName" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" required value="<?= $product['itemName'] ?>">
         </div>
         
         <div class="mb-4">
             <label for="hsn" class="block text-gray-700 font-medium mb-2">HSN Code</label>
-            <input type="text" id="hsn" name="hsn" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="<?= $product['hsn'] ?>">
+            <input type="text" id="hsn" name="hsn" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" value="<?= $product['hsn'] ?>">
         </div>
         
         <div class="grid grid-cols-2 gap-4 mb-4">
             <div>
                 <label for="priceUnit" class="block text-gray-700 font-medium mb-2">Unit Price *</label>
-                <input type="number" id="priceUnit" name="priceUnit" step="0.01" min="0" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required value="<?= $product['priceUnit'] ?>">
+                <input type="number" id="priceUnit" name="priceUnit" step="0.01" min="0" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" required value="<?= $product['priceUnit'] ?>">
             </div>
             
             <div>
                 <label for="qty" class="block text-gray-700 font-medium mb-2">Quantity</label>
-                <input type="number" id="qty" name="qty" min="0" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="<?= $product['qty'] ?>">
+                <input type="number" id="qty" name="qty" min="0" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" value="<?= $product['qty'] ?>">
                 <p class="text-xs text-gray-500 mt-1">Use "Adjust Inventory" for detailed stock changes.</p>
             </div>
         </div>
         
         <div class="mb-4">
             <label for="unitType" class="block text-gray-700 font-medium mb-2">Unit Type</label>
-            <select id="unitType" name="unitType" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <select id="unitType" name="unitType" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900">
                 <option value="Meter" <?= $product['unitType'] == 'Meter' ? 'selected' : '' ?>>Meter</option>
                 <option value="Piece" <?= $product['unitType'] == 'Piece' ? 'selected' : '' ?>>Piece</option>
                 <option value="Kg" <?= $product['unitType'] == 'Kg' ? 'selected' : '' ?>>Kg</option>
@@ -147,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         
         <div class="mt-6">
-            <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition">
+            <button type="submit" class="w-full bg-red-900 text-white py-2 px-4 rounded-lg hover:bg-red-900 transition">
                 <i class="fas fa-save mr-2"></i> Update Product
             </button>
         </div>
@@ -175,7 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <span class="text-xs mt-1">Products</span>
     </a>
     <a href="../sales/add.php" class="flex flex-col items-center p-2 text-gray-600">
-        <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
+        <div class="bg-red-900 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
             <i class="fas fa-plus text-xl"></i>
         </div>
         <span class="text-xs mt-1">New Sale</span>
