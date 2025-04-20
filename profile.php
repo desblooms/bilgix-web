@@ -272,7 +272,7 @@ include 'includes/header.php';
         <i class="fas fa-users text-xl"></i>
         <span class="text-xs mt-1">Customers</span>
     </a>
-    <a href="modules/reports/sales.php" class="flex flex-col items-center p-2 text-gray-600">
+    <a href="modules/reports/index.php" class="flex flex-col items-center p-2 text-gray-600">
         <i class="fas fa-chart-bar text-xl"></i>
         <span class="text-xs mt-1">Reports</span>
     </a>

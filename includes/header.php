@@ -170,7 +170,7 @@ if (!isLoggedIn() && !in_array(basename($_SERVER['PHP_SELF']), ['login.php', 'fo
                     <li><a href="<?= $basePath ?>modules/purchases/list.php" class="block px-4 py-3 hover:bg-gray-100"><i class="fas fa-shopping-basket w-6"></i> Purchases</a></li>
                     
                     <li class="border-t border-gray-200 mt-2 pt-2">
-                        <a href="<?= $basePath ?>modules/reports/sales.php" class="block px-4 py-3 hover:bg-gray-100"><i class="fas fa-chart-bar w-6"></i> Sales Reports</a>
+                        <a href="<?= $basePath ?>modules/reports/index.php" class="block px-4 py-3 hover:bg-gray-100"><i class="fas fa-chart-bar w-6"></i> Sales Reports</a>
                     </li>
                     <li><a href="<?= $basePath ?>modules/reports/inventory.php" class="block px-4 py-3 hover:bg-gray-100"><i class="fas fa-chart-line w-6"></i> Inventory Reports</a></li>
                     <li><a href="<?= $basePath ?>modules/reports/expenses.php" class="block px-4 py-3 hover:bg-gray-100"><i class="fas fa-file-invoice-dollar w-6"></i> Expense Reports</a></li>

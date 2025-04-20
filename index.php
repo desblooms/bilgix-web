@@ -79,7 +79,7 @@ if (file_exists($basePath . 'includes/finance_handler.php')) {
                 <i class="fas fa-plus-circle text-green-600 text-xl mb-2"></i>
                 <span class="text-xs text-center">Add Product</span>
             </a>
-            <a href="modules/reports/sales.php" class="flex flex-col items-center justify-center p-3 bg-purple-50 rounded-lg">
+            <a href="modules/reports/index.php" class="flex flex-col items-center justify-center p-3 bg-purple-50 rounded-lg">
                 <i class="fas fa-chart-line text-purple-600 text-xl mb-2"></i>
                 <span class="text-xs text-center">Reports</span>
             </a>
@@ -162,7 +162,7 @@ if (file_exists($basePath . 'includes/finance_handler.php')) {
         <i class="fas fa-users text-xl"></i>
         <span class="text-xs mt-1">Customers</span>
     </a>
-    <a href="modules/reports/sales.php" class="flex flex-col items-center p-2 text-gray-600">
+    <a href="modules/reports/index.php" class="flex flex-col items-center p-2 text-gray-600">
         <i class="fas fa-chart-bar text-xl"></i>
         <span class="text-xs mt-1">Reports</span>
     </a>
