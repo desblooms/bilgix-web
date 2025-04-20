@@ -2,7 +2,7 @@
 // Adjust path for includes
 $basePath = '../../';
 include $basePath . 'includes/header.php';
-
+include_once $basePath . 'includes/finance_handler.php';
 // Check if ID is provided
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     $_SESSION['message'] = "No sale specified for deletion!";
@@ -38,7 +38,17 @@ try {
         if ($product) {
             // Calculate new quantity
             $newQty = $product['qty'] + $item['quantity'];
-            
+           
+            // Record financial transaction to reverse the sale
+            $description = "Sale #" . $sale['invoiceNumber'] . " cancelled";
+            recordFinancialTransaction(
+                'adjustment',
+                'sale',
+                $saleId,
+                -$sale['totalPrice'], // Negative amount to reverse the sale
+                $description,
+                $_SESSION['user_id'] ?? null
+            );
             // Update product quantity
             $db->update('products', 
                        ['qty' => $newQty, 'updatedAt' => date('Y-m-d H:i:s')], 

@@ -2,6 +2,7 @@
 // Adjust path for includes
 $basePath = '../../';
 include $basePath . 'includes/header.php'; 
+include_once $basePath . 'includes/finance_handler.php';
 
 // Get all products for dropdown
 $products = getProducts();
@@ -84,7 +85,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
                 $db->insert('inventory_log', $logData);
             }
-            
+             // Record financial transaction (negative amount for purchases)
+    $vendorName = "";
+    if (!empty($vendorId)) {
+        foreach($vendors as $v) {
+            if ($v['id'] == $vendorId) {
+                $vendorName = $v['name'];
+                break;
+            }
+        }
+    }
+    
+    $description = "Purchase #" . $purchaseNumber;
+    if (!empty($vendorName)) {
+        $description .= " from " . $vendorName;
+    }
+    
+    recordFinancialTransaction(
+        'purchase',
+        'purchase',
+        $purchaseId,
+        -$totalAmount, // Negative amount for purchases/expenses
+        $description,
+        $_SESSION['user_id'] ?? null
+    );
             // Redirect to purchases list with success message
             $_SESSION['message'] = "Purchase created successfully!";
             $_SESSION['message_type'] = "success";

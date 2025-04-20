@@ -2,7 +2,7 @@
 // Adjust path for includes
 $basePath = '../../';
 include $basePath . 'includes/header.php'; 
-
+include_once $basePath . 'includes/finance_handler.php';
 // Check if ID is provided
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     $_SESSION['message'] = "No expense specified!";
@@ -58,6 +58,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Redirect to expense list with success message
             $_SESSION['message'] = "Expense updated successfully!";
             $_SESSION['message_type'] = "success";
+
+            $amountChanged = $amount != $expense['amount'];
+    
+            if ($amountChanged) {
+                // Record adjustment to reverse old amount
+                $reversalDesc = "Adjusted expense: " . $description . " (reversal)";
+                recordFinancialTransaction(
+                    'adjustment',
+                    'expense',
+                    $expenseId,
+                    $expense['amount'], // Positive amount to reverse the expense
+                    $reversalDesc,
+                    $_SESSION['user_id'] ?? null
+                );
+                
+                // Record new expense amount
+                $categoryName = "";
+                if (!empty($categoryId)) {
+                    foreach($categories as $cat) {
+                        if ($cat['id'] == $categoryId) {
+                            $categoryName = $cat['name'];
+                            break;
+                        }
+                    }
+                }
+                
+                $transactionDesc = "Adjusted expense: " . $description;
+                if (!empty($categoryName)) {
+                    $transactionDesc .= " (Category: " . $categoryName . ")";
+                }
+                
+                recordFinancialTransaction(
+                    'expense',
+                    'expense',
+                    $expenseId,
+                    -$amount, // Negative amount for expenses
+                    $transactionDesc,
+                    $_SESSION['user_id'] ?? null
+                );
+            }
+
+
+
             redirect($basePath . 'modules/expenses/list.php');
         } else {
             $errors[] = "Failed to update expense. Please try again.";
@@ -87,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form method="POST" class="bg-white rounded-lg shadow p-4">
         <div class="mb-4">
             <label for="categoryId" class="block text-gray-700 font-medium mb-2">Category</label>
-            <select id="categoryId" name="categoryId" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900">
+            <select id="categoryId" name="categoryId" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                 <option value="">-- Select Category --</option>
                 <?php foreach($categories as $category): ?>
                     <option value="<?= $category['id'] ?>" <?= $expense['categoryId'] == $category['id'] ? 'selected' : '' ?>>
@@ -101,24 +144,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="amount" class="block text-gray-700 font-medium mb-2">Amount *</label>
             <div class="relative">
                 <span class="absolute left-3 top-2"><?= CURRENCY ?></span>
-                <input type="number" id="amount" name="amount" step="0.01" min="0.01" class="w-full pl-8 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" required value="<?= $expense['amount'] ?>">
+                <input type="number" id="amount" name="amount" step="0.01" min="0.01" class="w-full pl-8 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required value="<?= $expense['amount'] ?>">
             </div>
         </div>
         
         <div class="mb-4">
             <label for="description" class="block text-gray-700 font-medium mb-2">Description *</label>
-            <input type="text" id="description" name="description" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" required value="<?= $expense['description'] ?>">
+            <input type="text" id="description" name="description" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required value="<?= $expense['description'] ?>">
         </div>
         
         <div class="grid grid-cols-2 gap-4 mb-4">
             <div>
                 <label for="expenseDate" class="block text-gray-700 font-medium mb-2">Date *</label>
-                <input type="date" id="expenseDate" name="expenseDate" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" required value="<?= $expense['expenseDate'] ?>">
+                <input type="date" id="expenseDate" name="expenseDate" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required value="<?= $expense['expenseDate'] ?>">
             </div>
             
             <div>
                 <label for="paymentMethod" class="block text-gray-700 font-medium mb-2">Payment Method</label>
-                <select id="paymentMethod" name="paymentMethod" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900">
+                <select id="paymentMethod" name="paymentMethod" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="Cash" <?= $expense['paymentMethod'] == 'Cash' ? 'selected' : '' ?>>Cash</option>
                     <option value="Card" <?= $expense['paymentMethod'] == 'Card' ? 'selected' : '' ?>>Card</option>
                     <option value="Bank Transfer" <?= $expense['paymentMethod'] == 'Bank Transfer' ? 'selected' : '' ?>>Bank Transfer</option>
@@ -130,12 +173,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         <div class="mb-4">
             <label for="reference" class="block text-gray-700 font-medium mb-2">Reference Number (optional)</label>
-            <input type="text" id="reference" name="reference" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900" value="<?= $expense['reference'] ?>">
+            <input type="text" id="reference" name="reference" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="<?= $expense['reference'] ?>">
             <p class="text-sm text-gray-600 mt-1">e.g., Receipt number, invoice number, etc.</p>
         </div>
         
         <div class="mt-6">
-            <button type="submit" class="w-full bg-red-900 text-white py-2 px-4 rounded-lg hover:bg-red-900 transition">
+            <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition">
                 <i class="fas fa-save mr-2"></i> Update Expense
             </button>
         </div>
@@ -153,7 +196,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <span class="text-xs mt-1">Products</span>
     </a>
     <a href="../sales/add.php" class="flex flex-col items-center p-2 text-gray-600">
-        <div class="bg-red-900 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
+        <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg">
             <i class="fas fa-plus text-xl"></i>
         </div>
         <span class="text-xs mt-1">New Sale</span>

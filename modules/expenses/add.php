@@ -2,7 +2,7 @@
 // Adjust path for includes
 $basePath = '../../';
 include $basePath . 'includes/header.php'; 
-
+include_once $basePath . 'includes/finance_handler.php';
 // Get all expense categories for dropdown
 $categories = $db->select("SELECT * FROM expense_categories ORDER BY name ASC");
 
@@ -44,6 +44,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors[] = "Failed to add expense. Please try again.";
         }
     }
+ // Record financial transaction (negative amount for expenses)
+ $categoryName = "";
+ if (!empty($categoryId)) {
+     foreach($categories as $cat) {
+         if ($cat['id'] == $categoryId) {
+             $categoryName = $cat['name'];
+             break;
+         }
+     }
+ }
+ 
+ $transactionDesc = "Expense: " . $description;
+ if (!empty($categoryName)) {
+     $transactionDesc .= " (Category: " . $categoryName . ")";
+ }
+ 
+ recordFinancialTransaction(
+     'expense',
+     'expense',
+     $expenseId,
+     -$amount, // Negative amount for expenses
+     $transactionDesc,
+     $_SESSION['user_id'] ?? null
+ );
+    
 }
 ?>
 

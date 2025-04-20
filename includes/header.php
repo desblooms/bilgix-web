@@ -102,8 +102,6 @@ if (!isLoggedIn() && !in_array(basename($_SERVER['PHP_SELF']), ['login.php', 'fo
                 padding-bottom: 5rem;
             }
         }
-
-
         
     </style>
      <link rel="stylesheet" href="/assets/css/app.css">

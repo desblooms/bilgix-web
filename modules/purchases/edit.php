@@ -2,7 +2,7 @@
 // Adjust path for includes
 $basePath = '../../';
 include $basePath . 'includes/header.php'; 
-
+include_once $basePath . 'includes/finance_handler.php';
 // Check if ID is provided
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     $_SESSION['message'] = "No purchase specified!";
@@ -53,6 +53,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($updated) {
         $_SESSION['message'] = "Purchase updated successfully!";
         $_SESSION['message_type'] = "success";
+        if ($paymentStatus != $purchase['paymentStatus']) {
+            $description = "Payment status updated for Purchase #" . $purchase['purchaseNumber'] . 
+                          " from " . $purchase['paymentStatus'] . " to " . $paymentStatus;
+            
+            recordFinancialTransaction(
+                'adjustment',
+                'purchase',
+                $purchaseId,
+                0, // No amount change, just recording the status change
+                $description,
+                $_SESSION['user_id'] ?? null
+            );
+        }
         redirect($basePath . 'modules/purchases/view.php?id=' . $purchaseId);
     } else {
         $_SESSION['message'] = "Failed to update purchase!";
