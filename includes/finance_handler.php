@@ -188,9 +188,9 @@ class FinanceHandler {
         $sql .= " ORDER BY ft.transaction_date DESC";
         
         if ($limit > 0) {
-            $sql .= " LIMIT :offset, :limit";
-            $params['offset'] = (int)$offset;
-            $params['limit'] = (int)$limit;
+            // Direct integer interpolation for LIMIT clause instead of using parameter binding
+            $sql .= " LIMIT " . (int)$offset . ", " . (int)$limit;
+            // Parameters removed as they're no longer needed
         }
         
         return $this->db->select($sql, $params);

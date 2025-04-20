@@ -72,7 +72,7 @@ $totalProfit = $totalSales - $totalExpenses - $totalPurchases;
 
 <div class="mb-6">
     <div class="flex items-center mb-4">
-        <a href="../dashboard/index.php" class="mr-2 text-slate-950">
+        <a href="<?= $basePath ?>index.php" class="mr-2 text-slate-950">
             <i class="fas fa-arrow-left"></i>
         </a>
         <h2 class="text-xl font-bold text-gray-800">Company Financial Settings</h2>
