@@ -3,7 +3,8 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 // Include configuration and functions
 require_once 'includes/config.php';
 require_once 'includes/functions.php';
@@ -55,8 +56,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
                 // In a real application, you would send an email with the reset link
                 // For this example, we'll just show the link (for development purposes)
-                $message = "A password reset link has been generated for development purposes:<br><a href='$resetLink' class='text-red-900 underline'>$resetLink</a>";
-                
+               
+
+
+require 'vendor/autoload.php'; // make sure this path is correct
+
+$mail = new PHPMailer(true);
+
+try {
+    // Server settings
+    $mail->isSMTP();
+    $mail->Host       = 'smtp.hostinger.com';
+    $mail->SMTPAuth   = true;
+    $mail->Username   = 'info@avoak.desblooms.in';
+    $mail->Password   = 'Avoak@123';
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // or use 'tls' if using port 587
+    $mail->Port       = 465;
+
+    // Recipients
+    $mail->setFrom('info@avoak.desblooms.in', APP_NAME);
+    $mail->addAddress($email); // user email
+
+    // Content
+    $mail->isHTML(true);
+    $mail->Subject = 'Password Reset - ' . APP_NAME;
+    $mail->Body    = "Hi,<br><br>Click the link below to reset your password:<br><br><a href='$resetLink'>$resetLink</a><br><br>This link will expire in 1 hour.<br><br>Thanks,<br>" . COMPANY_NAME;
+
+    $mail->send();
+    $message = "If an account with that email exists, password reset instructions have been sent.";
+} catch (Exception $e) {
+    $error = "Email could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
+
                 // In production, you might use something like PHPMailer to send emails:
                 // $mail = new PHPMailer(true);
                 // ... configure mail settings ...
